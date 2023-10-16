@@ -1,0 +1,11 @@
+SELECT
+    B.Business AS Business,
+    IFNULL(P.StreetNo, '') AS StreetNo,
+    IFNULL(P.Street, '') AS Street,
+    IFNULL(P.PostCode, '') AS PostCode,
+    IFNULL(SUM(F.Count), 0) AS FootfallCount
+FROM Businesses AS B
+LEFT JOIN Premises AS P ON B.Id = P.BusinessId
+LEFT JOIN Footfall AS F ON P.Id = F.PremisesId
+GROUP BY B.Business, StreetNo, Street, PostCode
+ORDER BY B.Business, StreetNo, Street, PostCode;
