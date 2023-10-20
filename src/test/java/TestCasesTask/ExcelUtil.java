@@ -35,9 +35,18 @@ public class ExcelUtil {
     public String getCellData(int rowNum, int colNum) {
         Cell cell;
         try {
-            cell = workSheet.getRow(rowNum).getCell(colNum);
-            String cellData = cell.toString();
-            return cellData;
+            Row row = workSheet.getRow(rowNum);
+            if (row != null) {
+                cell = row.getCell(colNum);
+                if (cell != null) {
+                    String cellData = cell.toString();
+                    return cellData;
+                } else {
+                    return "";
+                }
+            } else {
+                return "";
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
